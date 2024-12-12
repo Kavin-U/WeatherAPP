@@ -12,9 +12,9 @@ const BASE_URL = "https://api.weatherbit.io/v2.0/current";
 
 app.post("/weather", async (req, res) => {
   const { city } = req.body; // Assuming you're passing the city in the request body
-
+  console.log(city);
   try {
-    const response = await axios.get(`${BASE_URL}?city=${city}&key=${API_KEY}`);
+    const response = await axios.get(`${BASE_URL}?city=${city}&key=${API_KEY}&units=I`);
     console.log("Weather Data:", response.data);
     res.json(response.data.data); // Sending back the weather data
   } catch (e) {
