@@ -20,7 +20,7 @@ const WeatherApp = () => {
             city,
           });
           setWeatherData(response.data); // Set the weather data in state
-          console.log(response.data);
+          // console.log(response.data);
         } catch (e) {
           console.log("Error fetching weather:", e);
         }

@@ -4,7 +4,7 @@ const WeatherCard = ({ weatherData }) => {
   if (!weatherData || weatherData.length === 0) return <p>No data available</p>;
 
   const data = weatherData[0]; // Since the API response contains the data in an array
-  console.log(data);
+  // console.log(data);
   return (
     <div className="w-[90%] h-[90%] p-2 flex flex-col justify-between mt-3 rounded-lg bg-white bg-opacity-30">
       <div className="w-full h-[250px] rounded-md bg-white bg-opacity-65 p-5 sm:flex flex-col justify-center">
@@ -21,7 +21,7 @@ const WeatherCard = ({ weatherData }) => {
           Humidity
         </div>
         <div className="text-center">
-          <p>{data.wind_cdir_full} MPH</p>
+          <p>{data.wind_spd} MPH</p>
           Wind Speed
         </div>
       </div>

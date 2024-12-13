@@ -15,7 +15,7 @@ app.post("/weather", async (req, res) => {
   console.log(city);
   try {
     const response = await axios.get(`${BASE_URL}?city=${city}&key=${API_KEY}&units=I`);
-    console.log("Weather Data:", response.data);
+    // console.log("Weather Data:", response.data);
     res.json(response.data.data); // Sending back the weather data
   } catch (e) {
     console.error("Error fetching weather data:", e.response ? e.response.data : e.message);
