@@ -34,7 +34,7 @@ const WeatherApp = () => {
     <div className="bg-blue-700 w-screen h-screen p-10 flex flex-col items-center">
       <div className="relative">
         <input
-          type="search"
+          type="text"
           className="focus:outline-none rounded-xl w-[300px] p-2 sm:w-[400px] "
           value={city}
           onChange={handleChange}
@@ -52,9 +52,8 @@ const WeatherApp = () => {
       {weatherData ? (
         <WeatherCard weatherData={weatherData} />
       ) : (
-        <p>Loading...</p>
-      )}
-      {/* <WeatherCard /> */}
+        <WeatherCard />
+      )}      
     </div>
   );
 };

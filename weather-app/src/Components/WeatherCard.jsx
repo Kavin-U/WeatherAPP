@@ -1,70 +1,65 @@
 import React from "react";
+import WeatherImgs from "./WeatherImgs";
+import clearsky from "../assets/weather/Clear_sky.jpg";
 
 const WeatherCard = ({ weatherData }) => {
-  if (!weatherData || weatherData.length === 0) return <p>No data available</p>;
 
-  const data = weatherData[0]; // Since the API response contains the data in an array
-  // console.log(data);
+  let style = {
+    backgroundImage: `url(${clearsky})`,
+  };
+
+
+  const data = weatherData && weatherData.length > 0 ? weatherData[0] : null;
+
+
+  if (data && data.weather && data.weather.description) {
+    const description = data.weather.description.toLowerCase(); // Normalize description
+    style = {
+      backgroundImage: `url(${WeatherImgs[description] || clearsky})`, // Fallback to clearsky if image not found
+    };
+  }
+
   return (
-    <div className="w-[90%] h-[90%] p-2 flex flex-col justify-between mt-3 rounded-lg bg-white bg-opacity-30">
-      <div className="w-full h-[250px] rounded-md bg-white bg-opacity-65 p-5 sm:flex flex-col justify-center">
-        <h3 className="text-2xl">{data.city_name},{data.country_code}</h3>
-        <h1 className="text-5xl">{data.temp}°F</h1>
+    <div
+      style={style}
+      id="weather-main"
+      className="w-[90%] h-[90%] p-2 flex flex-col justify-between mt-3 rounded-lg bg-white bg-opacity-30"
+    >
+      <div className="w-full h-[250px] rounded-md bg-white bg-opacity-35 p-5 sm:flex flex-col justify-center">
+        {data ? (
+          <div>
+            <h3 className="text-2xl">
+              {data.city_name}, {data.country_code}
+            </h3>
+            <h1 className="text-5xl">{data.temp}°C</h1>
+            <p className="text-xl capitalize">{data.weather.description}</p>
+          </div>
+        ) : (
+          <p className="text-xl">Loading weather data...</p>
+        )}
       </div>
-      <div className="w-full flex justify-evenly rounded-md items-center bg-opacity-65 h-[100px] bg-white">
-        <div className="text-center">
-          <p>{data.app_temp}°F</p>
-          Feels like
-        </div>
-        <div className="text-center">
-          <p>{data.rh}%</p>
-          Humidity
-        </div>
-        <div className="text-center">
-          <p>{data.wind_spd} MPH</p>
-          Wind Speed
-        </div>
+      <div className="w-full flex justify-evenly rounded-md items-center bg-opacity-35 h-[100px] bg-white">
+        {data ? (
+          <>
+            <div className="text-center">
+              <p className="text-lg">{data.app_temp}°C</p>
+              <span className="text-sm">Feels like</span>
+            </div>
+            <div className="text-center">
+              <p className="text-lg">{data.rh}%</p>
+              <span className="text-sm">Humidity</span>
+            </div>
+            <div className="text-center">
+              <p className="text-lg">{data.wind_spd} MPH</p>
+              <span className="text-sm">Wind Speed</span>
+            </div>
+          </>
+        ) : (
+          <p className="text-center">Weather details unavailable</p>
+        )}
       </div>
     </div>
   );
 };
 
 export default WeatherCard;
-
-// <p>
-// <strong>Country:</strong> {data.country_code}
-// </p>
-// <p>
-// <strong>Temperature:</strong> {data.temp}°C
-// </p>
-// <p>
-// <strong>Apparent Temperature:</strong> {data.app_temp}°C
-// </p>
-// <p>
-// <strong>Air Quality Index (AQI):</strong> {data.aqi}
-// </p>
-// <p>
-// <strong>Humidity:</strong> {data.rh}%
-// </p>
-// <p>
-// <strong>Pressure:</strong> {data.pres} hPa
-// </p>
-// <p>
-// <strong>Wind:</strong> {data.wind_cdir_full} ({data.wind_cdir}) at{" "}
-// {data.wind_spd} m/s
-// </p>
-// <p>
-// <strong>Visibility:</strong> {data.vis} km
-// </p>
-// <p>
-// <strong>Sunrise:</strong> {data.sunrise}
-// </p>
-// <p>
-// <strong>Sunset:</strong> {data.sunset}
-// </p>
-// <p>
-// <strong>UV Index:</strong> {data.uv}
-// </p>
-// <p>
-// <strong>Weather Description:</strong> {data.weather.description}
-// </p>
