@@ -11,18 +11,18 @@ import Haze from '../assets/weather/Haze.jpg';
 
 
 const weatherimg = {
-   "Clear sky" : Clear,
-   "Few clouds" : Fewclouds,
-   "Scattered clouds" : Scattered,
-   "Broken clouds" : Broken,
-   "Overcast clouds" : Overcast,
-   "Rain" : Rain,
-   "Light rain" : Rain,
-   "Drizzle" : Rain,
-   "Thunderstorm" : Thunderstorm,
-   "Snow" : Snow,
-   "Mist" : Mist,
-   "Haze" : Haze,
+   "clear sky" : Clear,
+   "few clouds" : Fewclouds,
+   "scattered clouds" : Scattered,
+   "broken clouds" : Broken,
+   "overcast clouds" : Overcast,
+   "rain" : Rain,
+   "light rain" : Rain,
+   "drizzle" : Rain,
+   "thunderstorm" : Thunderstorm,
+   "snow" : Snow,
+   "mist" : Mist,
+   "haze" : Haze,
 }
 
 export default weatherimg;

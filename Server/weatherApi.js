@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import axios from "axios";  // You need to use axios to make the request
+import dotenv from 'dotenv';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+dotenv.config();
 const PORT = 3000;
 
-const API_KEY = "2e9c187e14f643eaa4a33aa0a4d390ad";
+const API_KEY = process.env.Weatherkey;
 const BASE_URL = "https://api.weatherbit.io/v2.0/current";
 
 app.post("/weather", async (req, res) => {
