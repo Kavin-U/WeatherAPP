@@ -11,3 +11,8 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Custom scrollbar styles */
+.scrollbar-thin {
+    scrollbar-width: thin; /* For Firefox */
+}
