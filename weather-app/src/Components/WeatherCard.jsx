@@ -4,11 +4,11 @@ import clearsky from "../assets/weather/Clear_sky.jpg";
 
 const WeatherCard = ({ weatherData }) => {
 
+
   let style = {
     backgroundImage: `url(${clearsky})`,
   };
-
-
+  
   const data = weatherData && weatherData.length > 0 ? weatherData[0] : null;
 
 
@@ -28,7 +28,7 @@ const WeatherCard = ({ weatherData }) => {
       <div className="w-full h-[250px] rounded-md bg-white bg-opacity-35 p-5 sm:flex flex-col justify-center">
         {data ? (
           <div>
-            <div>{data.ob_time}</div>
+            <div className="text-sm float-right" >{data.ob_time}</div>
             <h3 className="text-2xl">
               {data.city_name}, {data.country_code}
             </h3>

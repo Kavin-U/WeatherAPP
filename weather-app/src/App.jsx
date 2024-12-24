@@ -7,10 +7,47 @@ const WeatherApp = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
   const [search, setSearch] = useState(false);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setCity(e.target.value);
   };
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+          setError(null); // Clear any previous errors
+        },
+        (error) => {
+          setError(error.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by your browser.");
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchLocationWeather = async () => {
+      if (location.latitude && location.longitude) {
+        try {
+          const response = await axios.post("http://localhost:3000/weather", {
+            latitude: location.latitude,
+            longitude: location.longitude,
+          });
+          setWeatherData(response.data); // Set the weather data in state
+        } catch (e) {
+          console.log("Error fetching weather by location:", e);
+        }
+      }
+    };
+
+    fetchLocationWeather();
+  }, [location]);
 
   useEffect(() => {
     if (city) {
@@ -20,7 +57,6 @@ const WeatherApp = () => {
             city,
           });
           setWeatherData(response.data); // Set the weather data in state
-          // console.log(response.data);
         } catch (e) {
           console.log("Error fetching weather:", e);
         }
@@ -30,6 +66,7 @@ const WeatherApp = () => {
       setSearch(false);
     }
   }, [search]);
+
   return (
     <div className="bg-blue-700 w-screen h-screen p-10 flex flex-col items-center">
       <div className="relative">
@@ -49,11 +86,12 @@ const WeatherApp = () => {
           <IoSearch />
         </button>
       </div>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {weatherData ? (
         <WeatherCard weatherData={weatherData} />
       ) : (
         <WeatherCard />
-      )}      
+      )}
     </div>
   );
 };
