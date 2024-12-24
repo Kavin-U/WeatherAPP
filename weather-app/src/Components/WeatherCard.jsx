@@ -1,6 +1,8 @@
 import React from "react";
 import WeatherImgs from "./WeatherImgs";
 import clearsky from "../assets/weather/Clear_sky.jpg";
+import clear from "../assets/weather_icons/clear-sky.png";
+import weathericn from "./WeatherIcs";
 
 const WeatherCard = ({ weatherData }) => {
 
@@ -34,6 +36,7 @@ const WeatherCard = ({ weatherData }) => {
             </h3>
             <h1 className="text-5xl">{data.temp}°C</h1>
             <p className="text-xl capitalize">{data.weather.description}</p>
+            <div><img className="w-[70px] h-[70px] float-right" src={weathericn[data.weather.description.toLowerCase()] || clear} /></div>
           </div>
         ) : (
           <p className="text-xl">Loading weather data...</p>
