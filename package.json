@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon Server/weatherApi.js",
     "start": "node Server/weatherApi.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build" : "npm install  && npm install --prefix weather-app && npm build --prefix weather-app"
   },
   "keywords": [],
   "author": "",

@@ -2,11 +2,14 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import path from 'path';
 
 dotenv.config();
 
 const app = express();
 const PORT = 3000;
+
+const _dirname = path.resolve();
 
 // Middleware
 app.use(express.json());
@@ -58,3 +61,9 @@ app.post("/weather", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}...`);
 });
+
+app.use(express.static(path.join(_dirname, '/weather-app/dist')));
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(_dirname, 'weather-app', 'dist', 'index.html'));
+})
