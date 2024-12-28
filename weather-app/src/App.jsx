@@ -9,25 +9,31 @@ const WeatherApp = () => {
   const [search, setSearch] = useState(false);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState(null);
+  const [online , setOnline] =useState(false);
 
   const handleChange = (e) => {
     setCity(e.target.value);
   };
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({ latitude, longitude });
-          setError(null); // Clear any previous errors
-        },
-        (error) => {
-          setError(error.message);
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by your browser.");
+    if(navigator.onLine){
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setLocation({ latitude, longitude });
+            setError(null); // Clear any previous errors
+            setOnline(false);
+          },
+          (error) => {
+            setError(error.message);
+          }
+        );
+      } else {
+        setError("Geolocation is not supported by your browser.");
+      }
+    }else{
+        setOnline(true);
     }
   }, []);
 
@@ -67,8 +73,9 @@ const WeatherApp = () => {
     }
   }, [search]);
 
-  return (
+  return (<>
     <div className="bg-blue-700 w-screen h-screen p-10 flex flex-col items-center">
+    { online && <div className="text-center p-2 text-red-700">You're Offline</div>}
       <div className="relative">
         <input
           type="text"
@@ -93,6 +100,7 @@ const WeatherApp = () => {
         <WeatherCard />
       )}
     </div>
+    </>
   );
 };
 
