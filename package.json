@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon Server/weatherApi.js",
     "start": "node Server/weatherApi.js",
-    "build" : "npm install  && npm install --prefix weather-app && npm build --prefix weather-app"
+    "build": "npm install && npm install --prefix weather-app && npm run build --prefix weather-app"
   },
   "keywords": [],
   "author": "",
