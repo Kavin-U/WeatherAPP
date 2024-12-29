@@ -41,7 +41,7 @@ const WeatherApp = () => {
     const fetchLocationWeather = async () => {
       if (location.latitude && location.longitude) {
         try {
-          const response = await axios.post("https://weather-server-eta.vercel.app/weather", {
+          const response = await axios.post("http://localhost:3000/weather", {
             latitude: location.latitude,
             longitude: location.longitude,
           });
@@ -59,7 +59,7 @@ const WeatherApp = () => {
     if (city) {
       const fetchWeather = async () => {
         try {
-          const response = await axios.post("https://weather-server-eta.vercel.app/weather", {
+          const response = await axios.post("http://localhost:3000/weather", {
             city,
           });
           setWeatherData(response.data); // Set the weather data in state
