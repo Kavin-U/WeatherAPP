@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
-const _dirname = path.resolve();
+// const _dirname = path.resolve();
 
 // Middleware
 app.use(express.json());
@@ -62,8 +62,8 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}...`);
 });
 
-app.use(express.static(path.join(_dirname, '/weather-app/dist')));
+// app.use(express.static(path.join(_dirname, '/weather-app/dist')));
 
-app.get('*',(req,res)=>{
-  res.sendFile(path.join(_dirname, 'weather-app', 'dist', 'index.html'));
-})
+// app.get('*',(req,res)=>{
+//   res.sendFile(path.join(_dirname, 'weather-app', 'dist', 'index.html'));
+// })
