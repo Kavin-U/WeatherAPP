@@ -11,7 +11,10 @@ const WeatherCard = ({ weatherData }) => {
     backgroundImage: `url(${clearsky})`,
   };
 
-  const data = weatherData && weatherData.length > 0 ? weatherData[0] : null;
+  const data = weatherData || null;
+
+  console.log(data);
+  
 
   if (data && data.weather && data.weather.description) {
     const description = data.weather.description.toLowerCase(); // Normalize description
