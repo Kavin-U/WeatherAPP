@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import WeatherCard from "./Components/WeatherCard";
 import { IoSearch } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
 
 const WeatherApp = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -30,10 +31,12 @@ const WeatherApp = () => {
           },
           (error) => {
             setError("Geolocation permission denied or unavailable.");
+            toast("Geolocation permission denied or unavailable.")
           }
         );
       } else {
         setError("Geolocation is not supported by your browser.");
+        toast("Geolocation is not supported by your browser.")
       }
     } else {
       setOnline(true);
@@ -53,6 +56,7 @@ const WeatherApp = () => {
     } catch (err) {
       console.error("Error fetching weather by location:", err);
       setError("Failed to fetch weather using your location.");
+      toast("Failed to fetch weather using your location.")
     }
   };
 
@@ -70,6 +74,7 @@ const WeatherApp = () => {
     } catch (err) {
       console.error("Error fetching weather by city:", err);
       setError("Failed to fetch weather for the specified city.");
+      toast("Failed to fetch weather for the specified city.")
     }
   };
 
@@ -85,12 +90,14 @@ const WeatherApp = () => {
       setSearch(false);
     } else if (search && !city) {
       setError("Please enter a valid city name.");
+      toast("Please enter a valid city name.")
       setSearch(false);
     }
   }, [search]);
 
   return (
     <div className="bg-gray-900 w-screen h-screen p-10 flex flex-col items-center">
+      <ToastContainer/>
       {online && <div className="text-center p-2 text-red-700">You're Offline</div>}
       <div className="relative">
         <input
@@ -108,7 +115,7 @@ const WeatherApp = () => {
         </button>
       </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       {weatherData ? (
         <WeatherCard weatherData={weatherData} />
