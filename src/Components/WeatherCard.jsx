@@ -5,7 +5,7 @@ import clear from "../assets/weather_icons/clear-sky.png";
 import Sunrise from "../assets/weather_icons/sunrise.png";
 import Sunset from "../assets/weather_icons/sunset-.png";
 import weathericn from "./WeatherIcs";
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const WeatherCard = ({ weatherData }) => {
@@ -40,23 +40,26 @@ const WeatherCard = ({ weatherData }) => {
 
   if (loading) {
     return (
-      <div className="w-[90%] h-[90%] p-4 mt-3 rounded-lg bg-white bg-opacity-30">
-        <Skeleton height={250} />
-        <div className="flex justify-evenly mt-5 gap-20">
-          <div className="text-center">
-            <Skeleton height={30} width={80} />
-            <Skeleton width={60} />
+      <SkeletonTheme baseColor="#a4f2fc" highlightColor="white">
+        <div className="w-[90%] h-[90%] p-4 mt-3 overflow-hidden rounded-lg bg-white bg-opacity-30">
+          <Skeleton height={250} />
+          <div className="block md:flex justify-evenly my-4 gap-20">
+            <div className="text-center w-full md:w-[30%]">
+              <Skeleton height={30} width={"100%"} />
+              <Skeleton width={"60%"} />
+            </div>
+            <div className="text-center w-full md:w-[30%]">
+              <Skeleton height={30} width={"100%"} />
+              <Skeleton width={"60%"} />
+            </div>
+            <div className="text-center w-full md:w-[30%]">
+              <Skeleton height={30} width={"100%"} />
+              <Skeleton width={"60%"} />
+            </div>
           </div>
-          <div className="text-center">
-            <Skeleton height={30} width={80} />
-            <Skeleton width={60} />
-          </div>
-          <div className="text-center">
-            <Skeleton height={30} width={80} />
-            <Skeleton width={60} />
-          </div>
+          <Skeleton height={200} />
         </div>
-      </div>
+      </SkeletonTheme>
     );
   }
 
@@ -64,7 +67,7 @@ const WeatherCard = ({ weatherData }) => {
     <div
       style={style}
       id="weather-main"
-      className="w-[90%] h-[90%] p-2 flex flex-col gap-4 justify-between mt-3 rounded-lg bg-white bg-opacity-30 sm:bg-opacity-60"
+      className="w-[90%] h-[90%] p-2 flex flex-col gap-4 justify-between mt-3 overflow-hidden rounded-lg bg-white bg-opacity-30 sm:bg-opacity-60"
     >
       <div className="w-full h-[250px] rounded-md bg-white bg-opacity-35 p-5 sm:p-7 sm:flex block justify-between">
         <div>
@@ -87,7 +90,11 @@ const WeatherCard = ({ weatherData }) => {
             </p>
           </div>
           <div>
-            <img className="w-[50px] h-[50px] mb-3" src={Sunrise} alt="Sunrise" />
+            <img
+              className="w-[50px] h-[50px] mb-3"
+              src={Sunrise}
+              alt="Sunrise"
+            />
             <p>
               <span className="font-semibold">Sunrise</span> <br />
               {data.sunrise}
@@ -139,7 +146,11 @@ const WeatherCard = ({ weatherData }) => {
         </div>
         <div className="flex gap-4 justify-evenly">
           <div>
-            <img className="w-[50px] h-[50px] mb-3" src={Sunrise} alt="Sunrise" />
+            <img
+              className="w-[50px] h-[50px] mb-3"
+              src={Sunrise}
+              alt="Sunrise"
+            />
             <p>
               <span className="font-semibold">Sunrise</span> <br />
               {data.sunrise}
